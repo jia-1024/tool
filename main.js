@@ -1,6 +1,13 @@
-const {app, BrowserWindow, ipcMain} = require('electron');
 const path = require('path');
+const os = require('os');
+
+const {app, BrowserWindow, ipcMain} = require('electron');
 const log = require('electron-log');
+
+// 指定日志文件生成到系统家目录下
+log.transports.file.resolvePathFn = () => {
+    return path.join(os.homedir(), 'logs', 'tool.log');
+};
 
 console.log('log file path >>> ', log.transports.file.getFile().path);
 
