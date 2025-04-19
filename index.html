@@ -6,6 +6,18 @@
 </head>
 <body>
 <h1>Hello!</h1>
-<button onclick="alert('你点击了按钮')">点我</button>
+<button onclick="sendMockEvent()">发送一个模拟事件</button>
 </body>
+
+<script>
+    // 这里是渲染进程
+    // 渲染进程使用 ipcRenderer 与 主进程ipcMain 进行通信
+    const {ipcRenderer} = require('electron');
+
+    // 发送一个事件到主线程去
+    function sendMockEvent() {
+        ipcRenderer.send('event_1', {args: "mock event args"});
+    }
+
+</script>
 </html>

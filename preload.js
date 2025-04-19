@@ -1,4 +1,7 @@
-// 可以在这里安全地暴露 Node.js API 到页面中
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('预加载内容事件触发');
+});
+
 window.addEventListener('DOMContentLoaded', () => {
-    console.log('页面已加载');
+    console.log('预加载内容事件触发');
 });
