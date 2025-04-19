@@ -1,5 +1,8 @@
 const {app, BrowserWindow, ipcMain} = require('electron');
 const path = require('path');
+const log = require('electron-log');
+
+console.log('log file path >>> ', log.transports.file.getFile().path);
 
 function createWindow() {
     const win = new BrowserWindow({
@@ -24,13 +27,18 @@ function createWindow() {
 
 
     // 处理渲染线程的事件
-    ipcMain.on('event_1', (event, arg) => {
-        console.log('event_1 happen', arg);
+    ipcMain.on('event_1', (event, msg) => {
+        log.info(`渲染进程日志: ${msg}`)
+    });
+
+    ipcMain.on('log-msg', (event, msg) => {
+        log.info(`渲染进程日志: ${msg}`);
     });
 }
 
 app.whenReady().then(() => {
     createWindow();
+    log.info('主窗口创建完毕');
 
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow();

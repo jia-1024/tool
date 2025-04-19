@@ -16,8 +16,11 @@
 
     // 发送一个事件到主线程去
     function sendMockEvent() {
-        ipcRenderer.send('event_1', {args: "mock event args"});
+        ipcRenderer.send('event_1', "event_1 happen");
+        console.log("event_1 happen")
     }
 
+    ipcRenderer.send('log-msg', "页面加载完成");
+    console.log("页面加载完成")
 </script>
 </html>
