@@ -38,6 +38,7 @@ function createWindow() {
     });
 
     win.loadFile('index.html');
+    // win.loadURL("https://www.baidu.com")
 
     // 自动打开 DevTools,手动打开 Ctrl + Shift + I
     win.webContents.openDevTools();
