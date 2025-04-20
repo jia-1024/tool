@@ -25,7 +25,7 @@ function createWindow() {
     const win = new BrowserWindow({
         width: 800,
         height: 600,
-        icon: path.join(__dirname, 'build', 'icon.ico'),
+        icon: path.join(__dirname, '../build', 'icon.ico'),
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
             // 是否将 preload.js 与页面隔离（防止污染 window），如果是 true 则渲染进程与主进程之间通信必须借助与 preload.js 文件中的 contextBridge 桥接api
@@ -37,11 +37,12 @@ function createWindow() {
         autoHideMenuBar: true
     });
 
-    win.loadFile('index.html');
-    // win.loadURL("https://www.baidu.com")
-
-    // 自动打开 DevTools,手动打开 Ctrl + Shift + I
-    win.webContents.openDevTools();
+    if (process.env.NODE_ENV === 'development') {
+        win.loadURL('http://localhost:5173')
+        win.webContents.openDevTools()
+    } else {
+        win.loadFile(path.join(__dirname, '../dist/index.html'))
+    }
 
 
     // 处理渲染线程的事件

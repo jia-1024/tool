@@ -1,54 +1,13 @@
+<!-- index.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>tool</title>
 </head>
 <body>
-<h1>Hello!</h1>
-<button onclick="sendMockEvent()">发送一个模拟事件</button>
+<div id="app"></div>
+<script type="module" src="/src/main.js"></script>
 </body>
-
-<script>
-    /*  没有隔离node环境
-        // 这里是渲染进程
-        // 渲染进程使用 ipcRenderer 与 主进程ipcMain 进行通信
-        const {ipcRenderer} = require('electron');
-
-        // 引入jquery
-        const $ = require('jquery');
-
-        // 引入axios
-        const axios = require('axios');
-
-        axios.get('https://www.baidu.com').then(resp => {
-            // console.log(resp)
-        }).catch(e => {
-            console.log("err happen")
-            console.log(e)
-        })
-
-        // 测试 jQuery 是否正常工作
-        $(document).ready(() => {
-            console.log('jQuery is working!');
-        });
-
-        // 发送一个事件到主线程去
-        function sendMockEvent() {
-            ipcRenderer.send('event_1', "event_1 happen");
-            console.log("event_1 happen")
-        }
-        ipcRenderer.send('logApi', "页面加载完成");
-        */
-    console.log("页面加载完成")
-
-    // 隔离了node环境，需要通过 preload.js 暴露出来的 api 与 node 环境交互
-    function sendMockEvent() {
-        window.testApi.ping();
-        window.logApi.log('log test');
-        console.log(window.configFileApi.readConfig())
-        window.configFileApi.writeConfig({b: "123"})
-    }
-
-</script>
 </html>

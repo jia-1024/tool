@@ -1,10 +1,13 @@
 {
   "name": "tool",
   "version": "1.0.0",
-  "main": "main.js",
+  "main": "electron/main.js",
   "scripts": {
-    "start": "electron .",
-    "build": "electron-builder"
+    "vite_build": "vite build",
+    "vite_dev": "vite",
+    "electron_dev": "cross-env electron .",
+    "vite_and_electron_dev": "concurrently  \"npm run vite_build\" \"npm run vite_dev\" \"npm run electron_dev\"",
+    "electron_package": "npm run vite_build && electron-builder"
   },
   "build": {
     "appId": "com.AiLun.tool",
@@ -13,7 +16,8 @@
       "**/*"
     ],
     "directories": {
-      "output": "dist"
+      "buildResources": "build",
+      "output": "dist-electron"
     },
     "win": {
       "icon": "build/icon.ico",
@@ -23,12 +27,17 @@
     }
   },
   "devDependencies": {
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3",
     "electron": "^35.2.0",
-    "electron-builder": "^26.0.12"
+    "electron-builder": "^26.0.12",
+    "vite": "^6.3.2"
   },
   "dependencies": {
+    "@vitejs/plugin-vue": "^5.2.3",
     "axios": "^1.8.4",
     "electron-log": "^5.3.4",
-    "jquery": "^3.7.1"
+    "jquery": "^3.7.1",
+    "vue": "^3.5.13"
   }
 }
