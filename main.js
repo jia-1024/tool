@@ -3,6 +3,16 @@ const os = require('os');
 
 const {app, BrowserWindow, ipcMain} = require('electron');
 const log = require('electron-log');
+const axios = require('axios');
+
+app.on('ready', () => {
+    axios.get('https://www.baidu.com').then(resp => {
+        console.log(resp)
+    }).catch(e => {
+        console.log("err happen")
+        console.log(e)
+    })
+});
 
 // 指定日志文件生成到系统家目录下
 log.transports.file.resolvePathFn = () => {

@@ -14,6 +14,24 @@
     // 渲染进程使用 ipcRenderer 与 主进程ipcMain 进行通信
     const {ipcRenderer} = require('electron');
 
+    // 引入jquery
+    const $ = require('jquery');
+
+    // 引入axios
+    const axios = require('axios');
+
+    axios.get('https://www.baidu.com').then(resp => {
+        console.log(resp)
+    }).catch(e => {
+        console.log("err happen")
+        console.log(e)
+    })
+
+    // 测试 jQuery 是否正常工作
+    $(document).ready(() => {
+        console.log('jQuery is working!');
+    });
+
     // 发送一个事件到主线程去
     function sendMockEvent() {
         ipcRenderer.send('event_1', "event_1 happen");
