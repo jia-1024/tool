@@ -7,7 +7,7 @@ const axios = require('axios');
 
 app.on('ready', () => {
     axios.get('https://www.baidu.com').then(resp => {
-        console.log(resp)
+        // console.log(resp)
     }).catch(e => {
         console.log("err happen")
         console.log(e)
@@ -28,9 +28,9 @@ function createWindow() {
         icon: path.join(__dirname, 'build', 'icon.ico'),
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
-            // 是否将 preload.js 与页面隔离（防止污染 window）
-            contextIsolation: false,
-            // 允许在渲染进程中直接使用 require、fs 等 Node.js 模块
+            // 是否将 preload.js 与页面隔离（防止污染 window），如果是 true 则渲染进程与主进程之间通信必须借助与 preload.js 文件中的 contextBridge 桥接api
+            contextIsolation: true,
+            // 是否隔离渲染进程中的 require、fs 等 Node.js 模块
             nodeIntegration: true
         },
         // 关闭顶部菜单栏
@@ -48,7 +48,7 @@ function createWindow() {
         log.info(`渲染进程日志: ${msg}`)
     });
 
-    ipcMain.on('log-msg', (event, msg) => {
+    ipcMain.on('logApi', (event, msg) => {
         log.info(`渲染进程日志: ${msg}`);
     });
 }

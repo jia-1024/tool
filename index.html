@@ -10,35 +10,45 @@
 </body>
 
 <script>
-    // 这里是渲染进程
-    // 渲染进程使用 ipcRenderer 与 主进程ipcMain 进行通信
-    const {ipcRenderer} = require('electron');
+    /*  没有隔离node环境
+        // 这里是渲染进程
+        // 渲染进程使用 ipcRenderer 与 主进程ipcMain 进行通信
+        const {ipcRenderer} = require('electron');
 
-    // 引入jquery
-    const $ = require('jquery');
+        // 引入jquery
+        const $ = require('jquery');
 
-    // 引入axios
-    const axios = require('axios');
+        // 引入axios
+        const axios = require('axios');
 
-    axios.get('https://www.baidu.com').then(resp => {
-        console.log(resp)
-    }).catch(e => {
-        console.log("err happen")
-        console.log(e)
-    })
+        axios.get('https://www.baidu.com').then(resp => {
+            // console.log(resp)
+        }).catch(e => {
+            console.log("err happen")
+            console.log(e)
+        })
 
-    // 测试 jQuery 是否正常工作
-    $(document).ready(() => {
-        console.log('jQuery is working!');
-    });
+        // 测试 jQuery 是否正常工作
+        $(document).ready(() => {
+            console.log('jQuery is working!');
+        });
 
-    // 发送一个事件到主线程去
+        // 发送一个事件到主线程去
+        function sendMockEvent() {
+            ipcRenderer.send('event_1', "event_1 happen");
+            console.log("event_1 happen")
+        }
+        ipcRenderer.send('logApi', "页面加载完成");
+        */
+    console.log("页面加载完成")
+
+    // 隔离了node环境，需要通过 preload.js 暴露出来的 api 与 node 环境交互
     function sendMockEvent() {
-        ipcRenderer.send('event_1', "event_1 happen");
-        console.log("event_1 happen")
+        window.testApi.ping();
+        window.logApi.log('log test');
+        console.log(window.configFileApi.readConfig())
+        window.configFileApi.writeConfig({b: "123"})
     }
 
-    ipcRenderer.send('log-msg', "页面加载完成");
-    console.log("页面加载完成")
 </script>
 </html>
