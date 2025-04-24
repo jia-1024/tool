@@ -1,0 +1,11 @@
+{
+  "控制器迁移": {
+    "新数据库的tunnelId": 174,
+    "老数据库中子区域方向为1的子区域id": 1801,
+    "老数据库中子区域方向为2的子区域id": 1802,
+    "后台服务": "http://192.168.2.19:8129",
+    "headers": {
+      "Token": "eyJhbGciOiJSUzI1NiJ9.eyJ1c2VyLXZhbGlkYXRlLWNvbnRyb2xsZXIiOiJ7XCJpZFwiOjEsXCJ1TG9naW5pZFwiOlwic3VwZXJBZG1pblwiLFwidU5hbWVcIjpcIui2hee6p-euoeeQhuWRmFwiLFwidUVuYWJsZVwiOjF9IiwianRpIjoiMmQ3OGE4YmMtYTIwZi00MGZhLTk1ZjEtOWIxYjgyYzUyNjA5IiwiZXhwIjoxNzQ2MDY1NTM5fQ.aiEM5Z05GsGuPYiWiz-PmXXVZLwGDHQycJN8ZiD9-GEVwhPWldOVFs3rSVs3GpBYBo-LMnGwQYcpVMcrr-krf5Z5RRI-0ngTE6V56sZSNJBuM9Kt0K7ayepp8ZxqXM4tP1KwN6hMRe_lwMy864cD1nYpH6axV9hnYw1OwLT7S1ypXO1haRKCw0HJ6Xii4KUpJaLS7is-wU9KOzi6WsYj1x6A3ih9mJ3qIo10RHjC12d9-y_QLWPa1UW6pIMvdEZ4iF1lKYBR8k_qDHmSV0yaiWvgIVO_gBFsnoawLvic7GV4GfLWNycUXQ3QSP358wh1D3k6EGrdRt9v4HICzKRW7Q"
+    }
+  }
+}
