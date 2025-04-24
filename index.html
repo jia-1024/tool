@@ -1,54 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>tool</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>九通工具集</title>
+    <style>
+        /* 全局样式 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* 容器样式 */
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 标题样式 */
+        h1 {
+            text-align: center;
+            color: #007BFF;
+            margin-bottom: 20px;
+        }
+
+        /* 文件输入框样式 */
+        .file-input {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .file-input input[type="file"] {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: 2px dashed #007BFF;
+            border-radius: 5px;
+            background-color: #f0f8ff;
+            color: #007BFF;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-input input[type="file"]:hover {
+            border-color: #0056b3;
+            background-color: #e6f7ff;
+        }
+
+        /* 提示信息样式 */
+        .hint {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-<h1>Hello!</h1>
-<button onclick="sendMockEvent()">发送一个模拟事件</button>
-</body>
+<div class="container">
+    <h1>调光控制器迁移</h1>
+    <div class="file-input">
+        <input type="file" id="fileInput" accept="application/vnd.ms-excel, .xls">
+    </div>
+    <p class="hint">支持上传的文件类型：.xls</p>
+</div>
 
 <script>
-    /*  没有隔离node环境
-        // 这里是渲染进程
-        // 渲染进程使用 ipcRenderer 与 主进程ipcMain 进行通信
-        const {ipcRenderer} = require('electron');
-
-        // 引入jquery
-        const $ = require('jquery');
-
-        // 引入axios
-        const axios = require('axios');
-
-        axios.get('https://www.baidu.com').then(resp => {
-            // console.log(resp)
-        }).catch(e => {
-            console.log("err happen")
-            console.log(e)
-        })
-
-        // 测试 jQuery 是否正常工作
-        $(document).ready(() => {
-            console.log('jQuery is working!');
-        });
-
-        // 发送一个事件到主线程去
-        function sendMockEvent() {
-            ipcRenderer.send('event_1', "event_1 happen");
-            console.log("event_1 happen")
+    document.getElementById('fileInput').addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            console.log("文件类型:", file.type);
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                console.log("文件内容:", e.target.result);
+                window.fileHandle.readFile(e.target.result);
+            };
+            reader.readAsArrayBuffer(file);
         }
-        ipcRenderer.send('logApi', "页面加载完成");
-        */
-    console.log("页面加载完成")
-
-    // 隔离了node环境，需要通过 preload.js 暴露出来的 api 与 node 环境交互
-    function sendMockEvent() {
-        window.testApi.ping();
-        window.logApi.log('log test');
-        console.log(window.configFileApi.readConfig())
-        window.configFileApi.writeConfig({b: "123"})
-    }
-
+    });
 </script>
+</body>
 </html>

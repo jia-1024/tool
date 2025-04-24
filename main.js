@@ -3,16 +3,6 @@ const os = require('os');
 
 const {app, BrowserWindow, ipcMain} = require('electron');
 const log = require('electron-log');
-const axios = require('axios');
-
-app.on('ready', () => {
-    axios.get('https://www.baidu.com').then(resp => {
-        // console.log(resp)
-    }).catch(e => {
-        console.log("err happen")
-        console.log(e)
-    })
-});
 
 // 指定日志文件生成到系统家目录下
 log.transports.file.resolvePathFn = () => {
@@ -41,13 +31,13 @@ function createWindow() {
     // win.loadURL("https://www.baidu.com")
 
     // 自动打开 DevTools,手动打开 Ctrl + Shift + I
-    win.webContents.openDevTools();
+    // win.webContents.openDevTools();
 
 
     // 处理渲染线程的事件
-    ipcMain.on('event_1', (event, msg) => {
-        log.info(`渲染进程日志: ${msg}`)
-    });
+    // ipcMain.on('event_1', (event, msg) => {
+    //     log.info(`渲染进程日志: ${msg}`)
+    // });
 
     ipcMain.on('logApi', (event, msg) => {
         log.info(`渲染进程日志: ${msg}`);
